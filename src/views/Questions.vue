@@ -3,13 +3,12 @@
 
     <form @submit.prevent="submitAnswers">
 
-        <div v-for="(question, index) in questions" v-bind:key="question.id">
+        <div class="border mb-5" v-for="(question, index) in questions" v-bind:key="question.id" :id="`question${question.id}`">
 
-            <p>{{ question.question }}</p> <br>
+            <p>{{ question.question }}</p>
             {{ index }}
-            {{ question.id }}
 
-            <div class="border mt-2 mb-2">
+            <div class="">
                         
                 <input type="radio" :id="`one${question.id}`"  value="A" v-model="objAnswers.optionChosen[question.id]">
                 <label :for="`one${question.id}`">A</label>{{ question.optionA }}<br> 
@@ -20,7 +19,7 @@
                 <input type="radio" :id="`three${question.id}`" value="C" v-model="objAnswers.optionChosen[question.id]">
                 <label :for="`three${question.id}`">C</label>{{ question.optionC }}<br>
 
-                <span v-if="revealAnswers">ANSWER: {{ question.answer }}</span>  <br>
+                <!--<span v-if="revealAnswers">ANSWER: {{ question.answer }}</span>  <br>
 
                 <div v-if="revealAnswers">
                     <div class="failedQuestio" v-if="question.answer != questionStatus(question.id)">
@@ -29,7 +28,7 @@
                     <div class="gottenQuestio" v-if="question.answer == questionStatus(question.id)">
                         correct
                     </div>
-                </div>
+                </div>-->
 
             </div>
 
@@ -68,6 +67,18 @@ export default {
         },
         submitAnswers:function(){
             this.revealAnswers = true
+            //console.log(this.objAnswers);
+            //console.log(this.questions);
+
+            //let something = 
+            Object.keys(this.objAnswers.optionChosen).forEach(element => {
+                console.log(element)
+                console.log(this.questions);
+                /*let something = this.questions.filter(normall => normall.id !== element)
+                console.log(something);*/
+            })
+            
+
         }
     },
     mounted(){

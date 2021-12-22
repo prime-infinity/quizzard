@@ -1,43 +1,60 @@
 <template>
-  <div>
+  <div class="row justify-content-center mt-5 mb-5 pt-5 pb-5">
 
-    <form @submit.prevent="submitAnswers">
+    <div class="col-11 border question-border col-md-8 mb-5 p-3 bg-question" :class="[ objAnswers.optionChosen[question.id] ? 'answered':'not-answered' ]" v-for="(question, index) in questions" v-bind:key="question.id" :id="`question${question.id}`">
+        
+        <div class="row">
+            <div class="col-12">
+                <span>Question {{ index + 1 }}</span>
+            </div>
+            <div class="col-12">
+                <span class="font-weight-bold">{{ question.question }}</span>
+            </div>
+        </div>
+ 
 
-        <div class="border mb-5" :class="[ objAnswers.optionChosen[question.id] ? 'yess':'no' ]" v-for="(question, index) in questions" v-bind:key="question.id" :id="`question${question.id}`">
 
-            <p>{{ question.question }}</p>
-            {{ index }}
+        <div class="row mt-3">
 
-            <div class="">
-                        
+            <div class="col-12">
+
+                
                 <input type="radio" :id="`one${question.id}`"  value="A" v-model="objAnswers.optionChosen[question.id]">
-                <label :for="`one${question.id}`">A</label>{{ question.optionA }}<br> 
+                <label :for="`one${question.id}`">A</label> <span class="ml-2"> {{ question.optionA }} </span><br> 
 
                 <input type="radio" :id="`two${question.id}`" value="B" v-model="objAnswers.optionChosen[question.id]">
-                <label :for="`two${question.id}`">B</label>{{ question.optionB }}<br>
+                <label :for="`two${question.id}`">B</label> <span class="ml-2"> {{ question.optionB }}</span><br>
 
                 <input type="radio" :id="`three${question.id}`" value="C" v-model="objAnswers.optionChosen[question.id]">
-                <label :for="`three${question.id}`">C</label>{{ question.optionC }}<br>
+                <label :for="`three${question.id}`">C</label> <span class="ml-2"> {{ question.optionC }}</span><br>
 
                 <span v-if="revealAnswers">ANSWER: {{ question.answer }}</span>  <br>
 
                 <div v-if="revealAnswers">
-                    <div class="failedQuestio" v-if="question.answer != questionStatus(question.id)">
+                    <div class="failed-question p-2" v-if="question.answer != questionStatus(question.id)">
                         failed
                     </div>
-                    <div class="gottenQuestio" v-if="question.answer == questionStatus(question.id)">
+                    <div class="gotten-question p-2" v-if="question.answer == questionStatus(question.id)">
                         correct
                     </div>
                 </div>
 
-            </div>
+            </div> 
 
         </div>
 
-        <button :disabled="cannotSubmit" class="btn btn-success">SUBMIT</button>
+    </div>
 
-    </form>
+    
+        <div class="col-10 col-md-6" v-if="!revealAnswers">
+            <button style="width: 100%;" :disabled="cannotSubmit" class="btn button-theme pt-3 pb-3 font-xl" @click="submitAnswers">SUBMIT</button>
+        </div>
 
+        
+        <div class="col-10 col-md-6" v-if="hasResults">
+            <router-link to="/results"><button style="width: 100%;" class="btn button-theme pt-3 pb-3 font-xl">Results</button></router-link>
+        </div>
+   
   </div>
 </template>
 
@@ -52,6 +69,7 @@ export default {
             optionChosen:{},
         },
         revealAnswers:false,
+        hasResults:false,
       }
     },
     computed:{
@@ -78,10 +96,7 @@ export default {
         },
         submitAnswers:function(){
             this.revealAnswers = true
-            //console.log(this.questions);
-            /*console.log(this.questions.map(({ answer }) => answer));
-            console.log(Object.values(this.objAnswers.optionChosen));*/
-
+           
             let realAns = this.questions.map(({ answer }) => answer)
             let givenAns = Object.values(this.objAnswers.optionChosen)
             
@@ -97,7 +112,9 @@ export default {
                 //
 
             }
-            console.log(count);
+            this.$store.commit("SET_RESULTS",count)
+            this.hasResults = true
+            //console.log(count);
 
         }
     },
@@ -108,12 +125,26 @@ export default {
 </script>
 
 <style>
-
-    .yess{
-        background-color: yellow;
+    .question-border{
+        border-radius: 20px;
     }
-    .no{
-        background-color: tomato;
+    .answered{
+        border:1px solid #3CAC70 !important;
     }
-
+    .not-answered{
+        border: 1px solid red !important;
+    }
+    .bg-question{
+        background-color: #f8f8f8;
+    }
+    .failed-question{
+        background-color:lightcoral;
+        color:white;
+        border-radius: 50px;
+    }
+    .gotten-question{
+        background-color: #3CAC70;
+        color:white;
+        border-radius: 50px;
+    }
 </style>

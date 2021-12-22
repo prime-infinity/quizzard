@@ -15,6 +15,11 @@ const routes = [
     name: 'Questions',
     component: () => import('../views/Questions.vue')
   },
+  {
+    path: '/results',
+    name: 'Results',
+    component: () => import('../views/Results.vue')
+  },
 ]
 
 const router = new VueRouter({

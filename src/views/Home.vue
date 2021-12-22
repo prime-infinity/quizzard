@@ -19,6 +19,7 @@
       </div>
     </div>
     
+    <span class="textFloat fl text-theme-blend">Built for Future Africa</span>
 
   </div>
 </template>
@@ -122,6 +123,9 @@ export default {
   }
   .fb{
     bottom:15%;
+  }
+  .fl{
+    bottom:5%;
   }
   .text-theme{
     color: #3CAC70;

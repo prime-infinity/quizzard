@@ -1,56 +1,40 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    questions:[
-      {
-        id:0,
-        question:"this and that",
-        optionA:"yes",
-        optionB:"no",
-        optionC:"maybe",
-        answer:"B",
-      },
-      {
-        id:1,
-        question:"yes and no",
-        optionA:"this",
-        optionB:"that",
-        optionC:"maybe",
-        answer:"A",
-      },
-      {
-        id:2,
-        question:"car and bike",
-        optionA:"mirro",
-        optionB:"bonnet",
-        optionC:"maybe",
-        answer:"C",
-      },
-      {
-        id:3,
-        question:"malaria and fever",
-        optionA:"quinee",
-        optionB:"lonart",
-        optionC:"maybe",
-        answer:"A",
-      },
-      {
-        id:4,
-        question:"health center",
-        optionA:"why not",
-        optionB:"not really",
-        optionC:"maybe",
-        answer:"B",
-      },
-    ],
+
+    //backendhost:'https://my-json-server.typicode.com/prime-infinity/orb',
+    backendhost:'http://localhost:5000',
+    questions:[],
+    results:null,
+
   },
   mutations: {
+    SET_RESULTS(state,gotten){
+      state.results = gotten
+    },
+    GOTTEN_QUESTIONS(state,gotten){
+      state.questions = gotten
+    },
+
   },
   actions: {
+
+    getQuestions(context){
+      axios.get(this.state.backendhost+'/questions')
+      .then((res) =>{
+          context.commit('GOTTEN_QUESTIONS', res.data)
+          //console.log(res);
+      })
+      .catch((error) => {
+          console.log(error)
+      });
+    }
+
   },
   modules: {
   }

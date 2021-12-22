@@ -1,0 +1,62 @@
+{
+ 
+  "questions":[
+    {
+      "id":0,
+      "question":"All the below are programming languages EXCEPT",
+      "optionA":"Javascript",
+      "optionB":"HTML",
+      "optionC":"Python",
+      "answer":"B"
+    },
+    {
+      "id":1,
+      "question":"Which of These Languages DOES NOT have OOP as its core paradigm",
+      "optionA":"Java",
+      "optionB":"C++",
+      "optionC":"Golang",
+      "answer":"C"
+    },
+    {
+      "id":2,
+      "question":"Which One of this is the odd one out",
+      "optionA":"Nest.js",
+      "optionB":"Nuxt.js",
+      "optionC":"Next.js",
+      "answer":"A"
+    },
+    {
+      "id":3,
+      "question":"Which One of this is the odd one out",
+      "optionA":"REact.js",
+      "optionB":"Vue.js",
+      "optionC":"React Native",
+      "answer":"C"
+    },
+    {
+      "id":4,
+      "question":"Which of these is fastest",
+      "optionA":"Golang",
+      "optionB":"Python",
+      "optionC":"Javascript",
+      "answer":"A"
+    },
+    {
+      "id":5,
+      "question":"Which of these languages is statically typed",
+      "optionA":"Javascript",
+      "optionB":"Golang",
+      "optionC":"Python",
+      "answer":"B"
+    },
+    {
+      "id":6,
+      "question":"Which of these languages is dynamically typed",
+      "optionA":"Javascript",
+      "optionB":"Golang",
+      "optionC":"Java",
+      "answer":"A"
+    }
+  ]
+  
+}

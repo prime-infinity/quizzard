@@ -3,7 +3,7 @@
 
     <form @submit.prevent="submitAnswers">
 
-        <div class="border mb-5" :class="[ objAnswers.optionChosen[question.id] ? 'yess':'no' ]" v-for="(question, index) in questions" v-bind:key="question.id" :id="`question${question.id}`">
+        <div class="border mb-5" :class="[ questions.map(({ id }) => id).includes(objAnswers.optionChosen[question.id]) ? 'yess':'' ]"  v-for="(question, index) in questions" v-bind:key="question.id" :id="`question${question.id}`">
 
             <p>{{ question.question }}</p>
             {{ index }}
@@ -62,22 +62,55 @@ export default {
     
         cannotSubmit:function(){
 
-            if(this.questions.length != Object.keys(this.objAnswers.optionChosen).length){
+            /*if(this.questions.length != Object.keys(this.objAnswers.optionChosen).length){
                 return true
-            }
+            }*/
             return false
 
         },
         
+        yes:function(){
+            return true
+            //:class="{yess:yes}"
+        },
+        theObject:function(){
+            return Object.keys(this.objAnswers.optionChosen)
+        }
+
 
     }, 
     methods:{
- 
+        applyClass(e){
+            return{
+                'yess':this.questions.map(({ id }) => id).includes(e)
+            }
+        },
         questionStatus:function(e){
             return this.objAnswers.optionChosen[e]
         },
         submitAnswers:function(){
             this.revealAnswers = true
+
+            //console.log(this.objAnswers.optionChosen);
+            
+            let keysLength = Object.keys(this.objAnswers.optionChosen)
+            console.log(keysLength);
+            //console.log(this.questions);
+
+            let ids = this.questions.map(({ id }) => id);
+            console.log(ids);
+
+            //console.log(this.objAnswers);
+            //console.log(this.questions);
+
+            //let something = 
+            /*Object.keys(this.objAnswers.optionChosen).forEach(element => {
+                console.log(element)
+                console.log(this.questions);
+                /*let something = this.questions.filter(normall => normall.id !== element)
+                console.log(something);
+            })*/
+            
 
         }
     },
@@ -91,9 +124,6 @@ export default {
 
     .yess{
         background-color: yellow;
-    }
-    .no{
-        background-color: tomato;
     }
 
 </style>

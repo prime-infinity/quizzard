@@ -7,8 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 
-    //backendhost:'https://my-json-server.typicode.com/prime-infinity/orb',
-    backendhost:'http://localhost:5000',
+    backendhost:'https://my-json-server.typicode.com/prime-infinity/quizzard',
+    //backendhost:'http://localhost:5000',
     questions:[],
     results:null,
 
